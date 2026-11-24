@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "ما وظيفة هذا",
+		"shell.prefs": "التفضيلات",
+		"shell.keys": "المفاتيح",
+		"shell.close": "إغلاق",
+		"shell.card_title": "بطاقة الاسم",
+		"shell.card_size": "الحجم",
+		"shell.sound": "الصوت",
+		"shell.on": "تشغيل",
+		"shell.off": "إيقاف",
+		"shell.start_q": "ماذا تريد أن تفعل؟",
+		"shell.start_foot": "يمكنك التبديل في أي وقت.",
+		"shell.mode_study": "استكشاف",
+		"shell.mode_practice": "تعلّم",
+		"shell.mode_test": "اختبار",
+		"shell.mode": "الوضع",
+		"shell.new_best": "رقم قياسي جديد",
+		"shell.go_again": "مرة أخرى",
+		"shell.practise_misses": "تمرّن على الأخطاء",
+		"shell.time": "الوقت",
+		"shell.acc": "الدقة",
+		"shell.streak": "المتتالية",
+		"shell.test_complete": "اكتمل الاختبار",
+		"shell.correct": {
+			"one": "صحيحة",
+			"other": "صحيحة"
+		},
+		"shell.missed": {
+			"one": "فائتة",
+			"other": "فائتة"
+		},
+		"shell.key_sound": "<kbd>M</kbd> الصوت",
+		"shell.settings": "الإعدادات",
+		"shell.done": "تم",
+		"shell.restart": "ابدأ من جديد",
+		"shell.clean": "عرض نظيف",
+		"shell.exit_clean": "الخروج من العرض النظيف",
+		"shell.know": "تعرف {n} من {m}"
+	}
+}

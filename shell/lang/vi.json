@@ -1,0 +1,39 @@
+{
+	"ui": {
+		"shell.help_aria": "Mục này làm gì",
+		"shell.prefs": "Tùy chọn",
+		"shell.keys": "Phím",
+		"shell.close": "Đóng",
+		"shell.card_title": "Thẻ tên",
+		"shell.card_size": "Cỡ",
+		"shell.sound": "Âm thanh",
+		"shell.on": "Bật",
+		"shell.off": "Tắt",
+		"shell.start_q": "Bạn muốn làm gì?",
+		"shell.start_foot": "Bạn có thể đổi bất cứ lúc nào.",
+		"shell.mode_study": "Khám phá",
+		"shell.mode_practice": "Học",
+		"shell.mode_test": "Kiểm tra",
+		"shell.mode": "Chế độ",
+		"shell.new_best": "Kỷ lục mới",
+		"shell.go_again": "Làm lại",
+		"shell.practise_misses": "Luyện câu sai",
+		"shell.time": "Thời gian",
+		"shell.acc": "Độ chính xác",
+		"shell.streak": "Chuỗi đúng",
+		"shell.test_complete": "Hoàn thành bài kiểm tra",
+		"shell.correct": {
+			"other": "đúng"
+		},
+		"shell.missed": {
+			"other": "sai"
+		},
+		"shell.key_sound": "<kbd>M</kbd> âm thanh",
+		"shell.settings": "Cài đặt",
+		"shell.done": "Xong",
+		"shell.restart": "Bắt đầu lại",
+		"shell.clean": "Chế độ gọn",
+		"shell.exit_clean": "Thoát chế độ gọn",
+		"shell.know": "Bạn biết {n} trên {m}"
+	}
+}

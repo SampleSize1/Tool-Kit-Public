@@ -1,0 +1,15 @@
+{
+  "name": "samplesize1-tool-kit",
+  "private": true,
+  "type": "module",
+  "description": "Build a study tool in the samplesize1.com style: the shared look, a working template, the rules and a checker.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "new-tool": "node scripts/new-tool.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\""
+  }
+}

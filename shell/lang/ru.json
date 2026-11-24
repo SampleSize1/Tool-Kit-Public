@@ -1,0 +1,45 @@
+{
+	"ui": {
+		"shell.help_aria": "Что это делает",
+		"shell.prefs": "Общие настройки",
+		"shell.keys": "Клавиши",
+		"shell.close": "Закрыть",
+		"shell.card_title": "Карточка названия",
+		"shell.card_size": "Размер",
+		"shell.sound": "Звук",
+		"shell.on": "Вкл.",
+		"shell.off": "Выкл.",
+		"shell.start_q": "Что вы хотите сделать?",
+		"shell.start_foot": "Переключиться можно в любой момент.",
+		"shell.mode_study": "Обзор",
+		"shell.mode_practice": "Учить",
+		"shell.mode_test": "Тест",
+		"shell.mode": "Режим",
+		"shell.new_best": "Новый рекорд",
+		"shell.go_again": "Ещё раз",
+		"shell.practise_misses": "Повторить ошибки",
+		"shell.time": "Время",
+		"shell.acc": "Точность",
+		"shell.streak": "Серия",
+		"shell.test_complete": "Тест пройден",
+		"shell.correct": {
+			"one": "верно",
+			"few": "верно",
+			"many": "верно",
+			"other": "верно"
+		},
+		"shell.missed": {
+			"one": "ошибка",
+			"few": "ошибки",
+			"many": "ошибок",
+			"other": "ошибки"
+		},
+		"shell.key_sound": "<kbd>M</kbd> звук",
+		"shell.settings": "Настройки",
+		"shell.done": "Готово",
+		"shell.restart": "Заново",
+		"shell.clean": "Чистый вид",
+		"shell.exit_clean": "Выйти из чистого вида",
+		"shell.know": "Вы знаете {n} из {m}"
+	}
+}

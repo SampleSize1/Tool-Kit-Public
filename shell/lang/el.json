@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "Τι κάνει αυτό",
+		"shell.prefs": "Προτιμήσεις",
+		"shell.keys": "Πλήκτρα",
+		"shell.close": "Κλείσιμο",
+		"shell.card_title": "Κάρτα ονόματος",
+		"shell.card_size": "Μέγεθος",
+		"shell.sound": "Ήχος",
+		"shell.on": "Ναι",
+		"shell.off": "Όχι",
+		"shell.start_q": "Τι θα θέλατε να κάνετε;",
+		"shell.start_foot": "Μπορείτε να αλλάξετε οποιαδήποτε στιγμή.",
+		"shell.mode_study": "Εξερεύνηση",
+		"shell.mode_practice": "Μάθηση",
+		"shell.mode_test": "Τεστ",
+		"shell.mode": "Λειτουργία",
+		"shell.new_best": "Νέο ρεκόρ",
+		"shell.go_again": "Ξανά",
+		"shell.practise_misses": "Εξάσκηση στα λάθη",
+		"shell.time": "Χρόνος",
+		"shell.acc": "Ακρίβεια",
+		"shell.streak": "Σερί",
+		"shell.test_complete": "Το τεστ ολοκληρώθηκε",
+		"shell.correct": {
+			"one": "σωστό",
+			"other": "σωστά"
+		},
+		"shell.missed": {
+			"one": "λάθος",
+			"other": "λάθη"
+		},
+		"shell.key_sound": "<kbd>M</kbd> ήχος",
+		"shell.settings": "Ρυθμίσεις",
+		"shell.done": "Τέλος",
+		"shell.restart": "Από την αρχή",
+		"shell.clean": "Καθαρή προβολή",
+		"shell.exit_clean": "Έξοδος από την καθαρή προβολή",
+		"shell.know": "Ξέρετε {n} από {m}"
+	}
+}

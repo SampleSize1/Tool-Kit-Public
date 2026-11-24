@@ -1,0 +1,39 @@
+{
+	"ui": {
+		"shell.help_aria": "这是做什么的",
+		"shell.prefs": "偏好设置",
+		"shell.keys": "按键",
+		"shell.close": "关闭",
+		"shell.card_title": "名称卡片",
+		"shell.card_size": "大小",
+		"shell.sound": "声音",
+		"shell.on": "开",
+		"shell.off": "关",
+		"shell.start_q": "你想做什么？",
+		"shell.start_foot": "可以随时切换。",
+		"shell.mode_study": "探索",
+		"shell.mode_practice": "学习",
+		"shell.mode_test": "测试",
+		"shell.mode": "模式",
+		"shell.new_best": "新纪录",
+		"shell.go_again": "再来一次",
+		"shell.practise_misses": "练习错题",
+		"shell.time": "用时",
+		"shell.acc": "正确率",
+		"shell.streak": "连对",
+		"shell.test_complete": "测试完成",
+		"shell.correct": {
+			"other": "正确"
+		},
+		"shell.missed": {
+			"other": "答错"
+		},
+		"shell.key_sound": "<kbd>M</kbd> 声音",
+		"shell.settings": "设置",
+		"shell.done": "完成",
+		"shell.restart": "重新开始",
+		"shell.clean": "简洁视图",
+		"shell.exit_clean": "退出简洁视图",
+		"shell.know": "你已掌握 {n}/{m}"
+	}
+}

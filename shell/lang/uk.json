@@ -1,0 +1,45 @@
+{
+	"ui": {
+		"shell.help_aria": "Що це робить",
+		"shell.prefs": "Уподобання",
+		"shell.keys": "Клавіші",
+		"shell.close": "Закрити",
+		"shell.card_title": "Картка назви",
+		"shell.card_size": "Розмір",
+		"shell.sound": "Звук",
+		"shell.on": "Увімк.",
+		"shell.off": "Вимк.",
+		"shell.start_q": "Що ви хочете зробити?",
+		"shell.start_foot": "Перемкнутися можна будь-коли.",
+		"shell.mode_study": "Огляд",
+		"shell.mode_practice": "Вчити",
+		"shell.mode_test": "Тест",
+		"shell.mode": "Режим",
+		"shell.new_best": "Новий рекорд",
+		"shell.go_again": "Ще раз",
+		"shell.practise_misses": "Повторити помилки",
+		"shell.time": "Час",
+		"shell.acc": "Точність",
+		"shell.streak": "Серія",
+		"shell.test_complete": "Тест пройдено",
+		"shell.correct": {
+			"one": "правильно",
+			"few": "правильно",
+			"many": "правильно",
+			"other": "правильно"
+		},
+		"shell.missed": {
+			"one": "помилка",
+			"few": "помилки",
+			"many": "помилок",
+			"other": "помилки"
+		},
+		"shell.key_sound": "<kbd>M</kbd> звук",
+		"shell.settings": "Налаштування",
+		"shell.done": "Готово",
+		"shell.restart": "Спочатку",
+		"shell.clean": "Чистий вигляд",
+		"shell.exit_clean": "Вийти з чистого вигляду",
+		"shell.know": "Ви знаєте {n} із {m}"
+	}
+}

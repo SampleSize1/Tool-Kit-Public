@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "یہ کیا کرتا ہے",
+		"shell.prefs": "ترجیحات",
+		"shell.keys": "کیز",
+		"shell.close": "بند کریں",
+		"shell.card_title": "نام کا کارڈ",
+		"shell.card_size": "سائز",
+		"shell.sound": "آواز",
+		"shell.on": "آن",
+		"shell.off": "آف",
+		"shell.start_q": "آپ کیا کرنا چاہیں گے؟",
+		"shell.start_foot": "آپ کسی بھی وقت بدل سکتے ہیں۔",
+		"shell.mode_study": "دیکھیں",
+		"shell.mode_practice": "سیکھیں",
+		"shell.mode_test": "امتحان",
+		"shell.mode": "موڈ",
+		"shell.new_best": "نیا بہترین",
+		"shell.go_again": "دوبارہ",
+		"shell.practise_misses": "غلطیوں کی مشق کریں",
+		"shell.time": "وقت",
+		"shell.acc": "درستی",
+		"shell.streak": "لگاتار",
+		"shell.test_complete": "امتحان مکمل",
+		"shell.correct": {
+			"one": "درست",
+			"other": "درست"
+		},
+		"shell.missed": {
+			"one": "غلط",
+			"other": "غلط"
+		},
+		"shell.key_sound": "<kbd>M</kbd> آواز",
+		"shell.settings": "ترتیبات",
+		"shell.done": "ہو گیا",
+		"shell.restart": "دوبارہ شروع",
+		"shell.clean": "صاف منظر",
+		"shell.exit_clean": "صاف منظر سے باہر نکلیں",
+		"shell.know": "آپ {m} میں سے {n} جانتے ہیں"
+	}
+}

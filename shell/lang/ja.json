@@ -1,0 +1,39 @@
+{
+	"ui": {
+		"shell.help_aria": "これは何？",
+		"shell.prefs": "環境設定",
+		"shell.keys": "キー",
+		"shell.close": "閉じる",
+		"shell.card_title": "名前カード",
+		"shell.card_size": "サイズ",
+		"shell.sound": "サウンド",
+		"shell.on": "オン",
+		"shell.off": "オフ",
+		"shell.start_q": "何をしますか？",
+		"shell.start_foot": "いつでも切り替えられます。",
+		"shell.mode_study": "探索",
+		"shell.mode_practice": "学習",
+		"shell.mode_test": "テスト",
+		"shell.mode": "モード",
+		"shell.new_best": "自己ベスト更新",
+		"shell.go_again": "もう一度",
+		"shell.practise_misses": "間違いを練習",
+		"shell.time": "時間",
+		"shell.acc": "正答率",
+		"shell.streak": "連続",
+		"shell.test_complete": "テスト完了",
+		"shell.correct": {
+			"other": "正解"
+		},
+		"shell.missed": {
+			"other": "不正解"
+		},
+		"shell.key_sound": "<kbd>M</kbd> サウンド",
+		"shell.settings": "設定",
+		"shell.done": "完了",
+		"shell.restart": "やり直す",
+		"shell.clean": "すっきり表示",
+		"shell.exit_clean": "すっきり表示を終了",
+		"shell.know": "{m}個中{n}個を覚えました"
+	}
+}

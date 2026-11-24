@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "O que isto faz",
+		"shell.prefs": "Preferências",
+		"shell.keys": "Teclas",
+		"shell.close": "Fechar",
+		"shell.card_title": "Cartão do nome",
+		"shell.card_size": "Tamanho",
+		"shell.sound": "Som",
+		"shell.on": "Sim",
+		"shell.off": "Não",
+		"shell.start_q": "O que você quer fazer?",
+		"shell.start_foot": "Você pode trocar a qualquer momento.",
+		"shell.mode_study": "Explorar",
+		"shell.mode_practice": "Aprender",
+		"shell.mode_test": "Teste",
+		"shell.mode": "Modo",
+		"shell.new_best": "Novo recorde",
+		"shell.go_again": "De novo",
+		"shell.practise_misses": "Praticar os erros",
+		"shell.time": "Tempo",
+		"shell.acc": "Acerto",
+		"shell.streak": "Sequência",
+		"shell.test_complete": "Teste concluído",
+		"shell.correct": {
+			"one": "correto",
+			"other": "corretos"
+		},
+		"shell.missed": {
+			"one": "errado",
+			"other": "errados"
+		},
+		"shell.key_sound": "<kbd>M</kbd> som",
+		"shell.settings": "Ajustes",
+		"shell.done": "Pronto",
+		"shell.restart": "Reiniciar",
+		"shell.clean": "Visão limpa",
+		"shell.exit_clean": "Sair da visão limpa",
+		"shell.know": "Você sabe {n} de {m}"
+	}
+}

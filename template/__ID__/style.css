@@ -1,0 +1,14 @@
+/* __NAME__'s own look, after the shell every tool shares (../shell/shell.css: the brand, the name card, the score,
+   the list down the left, the settings and their "i", the windows, the result, the phone layout, and the wide middle
+   column every trainer has). Only this tool's subject goes here: never restyle one of the shell's pieces (a change to
+   one of them is made in shell.css, for every tool). Colours and fonts are the shell's variables (--fg, --muted, --ok…). */
+
+/* the subject, in the middle column under the name card */
+.board { flex: 1; min-height: 0; display: grid; place-items: center; align-content: center; gap: 14px; padding: 18px; }
+.board .answer { font-size: 22px; font-weight: 700; color: var(--bone); }
+.board .note { color: var(--muted); }
+
+/* the answers under it */
+.actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; width: min(100%, 620px); }
+.actions .btn.is-ok { border-color: var(--ok); color: var(--ok); }
+.actions .btn.is-bad { border-color: var(--bad); color: var(--bad); }

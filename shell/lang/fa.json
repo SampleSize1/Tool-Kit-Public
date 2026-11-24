@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "این چه می‌کند",
+		"shell.prefs": "ترجیحات",
+		"shell.keys": "کلیدها",
+		"shell.close": "بستن",
+		"shell.card_title": "کارت نام",
+		"shell.card_size": "اندازه",
+		"shell.sound": "صدا",
+		"shell.on": "روشن",
+		"shell.off": "خاموش",
+		"shell.start_q": "می‌خواهید چه کار کنید؟",
+		"shell.start_foot": "هر زمان می‌توانید تغییر دهید.",
+		"shell.mode_study": "کاوش",
+		"shell.mode_practice": "یادگیری",
+		"shell.mode_test": "آزمون",
+		"shell.mode": "حالت",
+		"shell.new_best": "رکورد جدید",
+		"shell.go_again": "دوباره",
+		"shell.practise_misses": "تمرین اشتباه‌ها",
+		"shell.time": "زمان",
+		"shell.acc": "دقت",
+		"shell.streak": "پیاپی",
+		"shell.test_complete": "آزمون کامل شد",
+		"shell.correct": {
+			"one": "درست",
+			"other": "درست"
+		},
+		"shell.missed": {
+			"one": "از دست‌رفته",
+			"other": "از دست‌رفته"
+		},
+		"shell.key_sound": "<kbd>M</kbd> صدا",
+		"shell.settings": "تنظیمات",
+		"shell.done": "تمام",
+		"shell.restart": "شروع دوباره",
+		"shell.clean": "نمای خلوت",
+		"shell.exit_clean": "خروج از نمای خلوت",
+		"shell.know": "{n} از {m} را بلدید"
+	}
+}

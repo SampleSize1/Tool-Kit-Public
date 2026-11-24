@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "Vad det här gör",
+		"shell.prefs": "Preferenser",
+		"shell.keys": "Tangenter",
+		"shell.close": "Stäng",
+		"shell.card_title": "Namnkort",
+		"shell.card_size": "Storlek",
+		"shell.sound": "Ljud",
+		"shell.on": "På",
+		"shell.off": "Av",
+		"shell.start_q": "Vad vill du göra?",
+		"shell.start_foot": "Du kan byta när som helst.",
+		"shell.mode_study": "Utforska",
+		"shell.mode_practice": "Lär dig",
+		"shell.mode_test": "Test",
+		"shell.mode": "Läge",
+		"shell.new_best": "Nytt rekord",
+		"shell.go_again": "Igen",
+		"shell.practise_misses": "Öva på missarna",
+		"shell.time": "Tid",
+		"shell.acc": "Träffsäkerhet",
+		"shell.streak": "Svit",
+		"shell.test_complete": "Testet klart",
+		"shell.correct": {
+			"one": "rätt",
+			"other": "rätt"
+		},
+		"shell.missed": {
+			"one": "miss",
+			"other": "missar"
+		},
+		"shell.key_sound": "<kbd>M</kbd> ljud",
+		"shell.settings": "Inställningar",
+		"shell.done": "Klar",
+		"shell.restart": "Börja om",
+		"shell.clean": "Ren vy",
+		"shell.exit_clean": "Lämna ren vy",
+		"shell.know": "Du kan {n} av {m}"
+	}
+}

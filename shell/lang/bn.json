@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "এটি কী করে",
+		"shell.prefs": "পছন্দ",
+		"shell.keys": "কী",
+		"shell.close": "বন্ধ করুন",
+		"shell.card_title": "নামের কার্ড",
+		"shell.card_size": "আকার",
+		"shell.sound": "শব্দ",
+		"shell.on": "চালু",
+		"shell.off": "বন্ধ",
+		"shell.start_q": "আপনি কী করতে চান?",
+		"shell.start_foot": "যেকোনো সময় বদলাতে পারেন।",
+		"shell.mode_study": "দেখুন",
+		"shell.mode_practice": "শিখুন",
+		"shell.mode_test": "পরীক্ষা",
+		"shell.mode": "মোড",
+		"shell.new_best": "নতুন সেরা",
+		"shell.go_again": "আবার",
+		"shell.practise_misses": "ভুলগুলো অনুশীলন করুন",
+		"shell.time": "সময়",
+		"shell.acc": "নির্ভুলতা",
+		"shell.streak": "টানা",
+		"shell.test_complete": "পরীক্ষা শেষ",
+		"shell.correct": {
+			"one": "ঠিক",
+			"other": "ঠিক"
+		},
+		"shell.missed": {
+			"one": "ভুল",
+			"other": "ভুল"
+		},
+		"shell.key_sound": "<kbd>M</kbd> শব্দ",
+		"shell.settings": "সেটিংস",
+		"shell.done": "হয়েছে",
+		"shell.restart": "আবার শুরু",
+		"shell.clean": "পরিষ্কার দৃশ্য",
+		"shell.exit_clean": "পরিষ্কার দৃশ্য থেকে বের হন",
+		"shell.know": "{m}-এর মধ্যে {n}টি জানেন"
+	}
+}

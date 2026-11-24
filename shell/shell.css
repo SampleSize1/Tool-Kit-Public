@@ -1,0 +1,530 @@
+/* The shared look of every tool on samplesize1.com/tools: the 3D atlases, the map tools, the trainers and every tool
+   to come. Each tool page loads it first, before its family's own styles:
+
+     <link rel="stylesheet" href="../shell/shell.css">                 (then ../atlas-engine/atlas.css, or the page's <style>)
+
+   What is here is the shell around a tool's subject, the same piece for piece in every tool: the colours and fonts,
+   the brand with the line under it, the name in its card (or on its gradient) top centre, the score in three boxes,
+   the list down the left, the settings on the right with each row's "i", Preferences and Keys, the first-visit card,
+   the result of a round in the name's place, the toast, the windows, clean view, and the phone layout (bottom
+   sheets). Its decisions are in claude/atlas-ui-plan.md and the rules in CLAUDE.md ("Every tool's screen").
+
+   What is not here is each tool's own: its subject in the middle (a 3D model, a map, a card table, a board, photos)
+   and whatever it alone needs. Those styles are in its family's stylesheet (atlas-engine/atlas.css for the 3D atlases)
+   or its own page. A tool may change a value of the shell through the variables below (in a small <style> after this
+   file), and may lay out its own middle column; it never restyles a piece of the shell in its own styles. A piece
+   every tool should look different in is changed here, once. tests/unit/shell/ checks the pages against this.
+
+   Where one 3D atlas differs from the rest, its rule is in atlas.css and starts with :where([data-atlas="…"]). */
+:root {
+  --bg: #0a0f14;
+  --bg-lift: #121b23;
+  --panel: rgba(13, 20, 27, 0.86);
+  --line: #223140;
+  --line-strong: #33475a;
+  --fg: #e8edf0;
+  --muted: #8d9ca9;
+  --bone: #ecdec2;
+  --scan: #6fd0e8;
+  --ok: #5fd39a;
+  --bad: #ff7a6b;
+  --miss: #ff7a6b;   /* missed pieces in the results. A tool whose subject is red sets its own (Muscle, Organ, Brain: amber) */
+  --close: #f5d04e;  /* nearly right (a small misspelling, in the map tools' results) */
+  --tip-width: 70ch;     /* the line of description under the name in Study: how wide it may run… */
+  --tip-height: 4.35em;  /* …and the room kept for it (three lines), so the prompt keeps its size from one piece to the next */
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+  --panel-w: 322px;   /* the settings panel's width; the right-hand column is never narrower, so the panel never covers the middle */
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  /* also set here, not just on :root: a page that embeds this one (the claude.ai preview) can switch the root to a light
+     scheme, and the language menu's drop-down list would then draw its highlighted row as dark text on dark */
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-display);
+  font-size: 14px;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ui {
+  position: fixed; inset: 0;
+  padding-block: calc(env(safe-area-inset-top, 0px) + 14px) calc(env(safe-area-inset-bottom, 0px) + 14px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: minmax(248px, 1fr) minmax(0, calc(560px * var(--card-w, 1))) minmax(var(--panel-w), 1fr);   /* 248 = the left column's width, --panel-w the settings' */
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 12px;
+}
+.ui > * { pointer-events: auto; }
+
+/* ---------- brand ----------
+   The name sits straight on the model, with a soft dark shadow behind the words and the logo (no box). Every tool
+   uses this same shadow. */
+.brand { grid-column: 1; grid-row: 1; align-self: start; display: grid; gap: 5px; min-width: 0; text-shadow: 0 1px 10px rgba(5, 8, 11, 0.85); }
+.lockup { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.home { display: inline-flex; align-items: center; gap: 7px; color: var(--bone); text-decoration: none; flex: none; border-radius: 4px; }
+.home .logo-mark { height: 21px; width: auto; color: var(--scan); flex: none; transition: filter .15s; filter: drop-shadow(0 1px 5px rgba(5, 8, 11, 0.85)); }
+.home:hover .logo-mark { filter: drop-shadow(0 1px 5px rgba(5, 8, 11, 0.85)) brightness(1.2) drop-shadow(0 0 6px rgba(111, 208, 232, 0.45)); }
+.brand .mark { direction: ltr; font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; font-size: 20px; color: var(--bone); line-height: 1; white-space: nowrap; }
+.brand .mark span { color: var(--scan); }
+.brand .mark .beta { font-style: normal; font-family: var(--f-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--scan); border: 1px solid var(--scan); border-radius: 4px; padding: 2px 5px; vertical-align: 4px; margin-inline-start: 4px; opacity: .85; }
+
+/* ---------- prompt tag ---------- */
+.prompt {
+  /* spans into the flexible row so its height never changes the size of row 1 (the map and panel stay put) */
+  grid-column: 2; grid-row: 1 / 3; align-self: start; justify-self: center; width: 100%; box-sizing: border-box;   /* stays inside its column */
+  background: var(--panel); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line-strong); border-radius: var(--r);
+  padding: 12px 18px; display: grid; gap: 4px; text-align: center; position: relative;
+}
+.eyebrow { font-family: var(--f-mono); font-size: calc(11px * var(--card-soft, 1)); letter-spacing: 0.16em; text-transform: uppercase; color: var(--scan); }
+.pname { font-weight: 750; font-stretch: 112%; font-size: calc(clamp(22px, 2.6vw, 34px) * var(--card-scale, 1)); line-height: 1.1; color: var(--bone); white-space: nowrap; overflow: hidden; text-wrap: balance; }
+.pmeta { font-family: var(--f-mono); font-size: calc(11.5px * var(--card-soft, 1)); color: var(--muted); font-variant-numeric: tabular-nums; }
+/* Study shows a line or three about the piece here (what it does, what it joins, where it comes from) */
+.ptip { font-size: 12.5px; line-height: 1.45; color: var(--muted); max-width: var(--tip-width); justify-self: center; text-wrap: pretty; margin-top: 2px; min-height: var(--tip-height); }
+.ptip b { color: var(--fg); font-weight: 600; }
+.pbar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.pbar i { display: block; height: 100%; width: 0%; background: var(--scan); transition: width .35s ease; }
+.prompt.is-ok { border-color: var(--ok); }
+.prompt.is-bad { border-color: var(--bad); }
+.prompt.is-reveal .eyebrow { color: var(--bad); }
+/* The name's options (Preferences): its size, its place (at the top or under the model) and its style: in a card, or
+   straight on the model with no card ("Gradient": body.name-flat, see .card-fade). Saved for every 3D atlas (the map tools save theirs apart). */
+body { --card-soft: calc(0.5 + 0.5 * var(--card-scale, 1)); }   /* (the card's small print grows half as fast as the name) */
+.card-x { width: 26px; height: 26px; padding: 0; font: 400 19px/1 system-ui, sans-serif; color: var(--muted); background: none; border: 0; border-radius: 6px; cursor: pointer; }
+.card-x:hover, .card-x:focus-visible { color: var(--fg); background: rgba(255, 255, 255, .08); }
+.card-row { display: flex; align-items: center; gap: 8px; font: 500 11px/1 var(--f-mono); color: var(--muted); }
+.card-row + .card-row { margin-top: 10px; }
+.card-row > span { min-width: 5.5em; letter-spacing: .08em; text-transform: uppercase; }
+.card-row input[type="range"] { flex: 1; min-width: 0; accent-color: var(--scan); }
+.card-row output { min-width: 3.2em; text-align: end; color: var(--fg); font-variant-numeric: tabular-nums; }
+.card-row .seg { flex: 1; font-family: var(--f-display); }
+.card-fade { display: none; }
+/* Previous and Next (Explore) stand either side of the name, level with its middle: round buttons beside a card, the
+   arrows alone where the name has no card. Where there is no room beside the name (the engine says: body.flank-in,
+   and always on a phone) they sit inside its edges. */
+.flank { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; display: grid; place-items: center; color: var(--fg); background: var(--panel); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--line-strong); border-radius: 50%; cursor: pointer; }
+.flank svg { width: 16px; height: 16px; }
+.flank.prev { inset-inline-start: -52px; }
+.flank.next { inset-inline-end: -52px; }
+[dir=rtl] .flank svg { transform: scaleX(-1); }
+.flank:hover { border-color: var(--scan); color: var(--scan); }
+body.flank-in .prompt.stepping { padding-inline: 46px; }
+body.flank-in .flank { width: 36px; background: none; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+body.flank-in .flank.prev { inset-inline-start: 4px; }
+body.flank-in .flank.next { inset-inline-end: 4px; }
+/* Gradient (Preferences: Style; these atlases start with it): the name stands straight on the model, with no card,
+   at the top or under the model, on a dark bar that fades into the model, so the name reads whatever is behind it.
+   The engine sets where the bar ends and how long the fade is (--run); the steps ease it in so no edge shows. At the
+   top the name keeps a little room above it. A click in Find it flashes the small line over the name green or red,
+   as a card's frame does. */
+body.name-flat .prompt { background: none; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+body.name-flat .prompt.is-ok .eyebrow { color: var(--ok); }
+body.name-flat .prompt.is-bad .eyebrow { color: var(--bad); }
+body.name-flat .flank { color: var(--muted); background: none; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+body.name-flat .flank svg { width: 26px; height: 26px; }
+body.name-flat .flank:hover { color: var(--scan); }
+.card-fade[hidden] { display: none !important; }
+body.name-flat:not(.present) .card-fade { display: block; position: fixed; left: 0; right: 0; top: 0; height: 34vh; pointer-events: none; background: linear-gradient(to top, rgba(5, 8, 11, 0) 0, rgba(5, 8, 11, 0.02) calc(var(--run, 160px) * 0.15), rgba(5, 8, 11, 0.07) calc(var(--run, 160px) * 0.3), rgba(5, 8, 11, 0.18) calc(var(--run, 160px) * 0.45), rgba(5, 8, 11, 0.36) calc(var(--run, 160px) * 0.6), rgba(5, 8, 11, 0.58) calc(var(--run, 160px) * 0.75), rgba(5, 8, 11, 0.77) calc(var(--run, 160px) * 0.88), rgba(5, 8, 11, 0.9) calc(var(--run, 160px) * 1), rgba(5, 8, 11, .97) 100%); }
+@media (min-width: 901px) {
+  body.card-bottom .prompt { align-self: end; }   /* (Preferences: Bottom. The name under the model) */
+  body.name-flat .prompt { margin-top: 12px; }
+  body.name-flat.card-bottom .prompt { margin: 0 0 10px; }
+  body.name-flat.card-bottom:not(.present) .card-fade { bottom: 0; top: 60vh; height: auto; background: linear-gradient(to bottom, rgba(5, 8, 11, 0) 0, rgba(5, 8, 11, 0.02) calc(var(--run, 300px) * 0.15), rgba(5, 8, 11, 0.07) calc(var(--run, 300px) * 0.3), rgba(5, 8, 11, 0.18) calc(var(--run, 300px) * 0.45), rgba(5, 8, 11, 0.36) calc(var(--run, 300px) * 0.6), rgba(5, 8, 11, 0.58) calc(var(--run, 300px) * 0.75), rgba(5, 8, 11, 0.77) calc(var(--run, 300px) * 0.88), rgba(5, 8, 11, 0.9) calc(var(--run, 300px) * 1), rgba(5, 8, 11, .97) 100%); }
+}
+/* The result of a round stands in the name's place, not on a card over the model (so the model, coloured by how it
+   went, stays in view): the score, big; the time, the accuracy and the longest streak in three boxes beside it; Go
+   again, with Practise the misses beside it when there are any; then the key to the colours. While it shows, the
+   name's own lines make way (.prompt.is-review) and the score boxes at the top are off (on a phone, where they sit
+   right under it, they go: body.reviewing). The same in every tool. */
+.prompt.is-review { text-align: start; }
+.prompt.is-review > .pname, .prompt.is-review > .pmeta, .prompt.is-review > .pbar { display: none; }
+.prompt.is-review > .eyebrow { padding-inline-end: 96px; min-height: 22px; align-content: center; }
+.prompt > .pill { position: absolute; top: 10px; inset-inline-end: 18px; }
+.pill { font-family: var(--f-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; padding: 5px 9px; border-radius: 999px; background: var(--ok); color: var(--bg); }
+.review { display: grid; gap: 10px; margin-top: 4px; }
+.res-main { display: flex; align-items: center; gap: 18px; }
+[dir=rtl] .res-score { justify-content: flex-end; }
+.res-score { display: flex; align-items: baseline; gap: 8px; font-stretch: 112%; line-height: 0.9; flex: none; direction: ltr; }
+.res-score b { font-weight: 800; font-size: 68px; color: var(--bone); }
+.res-score span { font-weight: 700; font-size: 28px; color: var(--muted); }
+.res-tiles { flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.res-tiles div { display: grid; gap: 3px; padding: 9px 11px; border: 1px solid var(--line-strong); border-radius: 10px; min-width: 0; background: rgba(13, 20, 27, 0.55); }
+.res-tiles b { font-family: var(--f-mono); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--fg); }
+.res-tiles span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.res-actions { display: flex; gap: 8px; }
+.res-actions .btn { flex: 1 1 0; min-width: 0; padding: 11px 14px; font-size: 14px; font-weight: 700; border-radius: 9px; }
+.res-actions .btn.primary { flex: 2 1 0; }
+.res-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.res-foot .key { display: inline-flex; align-items: center; gap: 6px; }
+.res-foot .key i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.res-foot .key b { font-family: var(--f-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+.res-foot .ok i { background: var(--ok); } .res-foot .ok b { color: var(--ok); }
+.res-foot .bad i { background: var(--miss); } .res-foot .bad b { color: var(--miss); }
+.res-foot .close i { background: var(--close); } .res-foot .close b { color: var(--close); }
+.res-foot .rhint { margin: 0; margin-inline-start: auto; font-size: 12.5px; color: var(--muted); }
+body.clean .res-actions, body.clean .rhint { display: none; }
+@media (max-width: 900px) {
+  body.reviewing .stats { display: none; }
+  .prompt > .pill { top: 7px; inset-inline-end: 14px; }
+  .review { gap: 8px; }
+  .res-main { gap: 12px; }
+  .res-score b { font-size: 52px; } .res-score span { font-size: 22px; }
+  .res-tiles { gap: 5px; } .res-tiles div { padding: 6px 8px; } .res-tiles b { font-size: 15px; } .res-tiles span { font-size: 9px; letter-spacing: 0.06em; }
+  .res-actions .btn { padding: 10px 8px; font-size: 13px; }
+  .res-foot .rhint { display: none; }
+}
+
+/* ---------- stats ---------- */
+.stats { grid-column: 3; grid-row: 1; justify-self: end; align-self: start; display: flex; gap: 6px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; display: grid; gap: 1px; min-width: 64px; }
+.stat b { font-family: var(--f-mono); font-weight: 600; font-size: 16px; font-variant-numeric: tabular-nums; }
+.stat small { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+/* Desktop: in Study the score boxes are invisible but keep their space, so the region map, View menu and
+   Settings panel sit at the same height in every mode (otherwise the top row grows when they appear). */
+/* (in Explore the score stays where it is, greyed out: nothing appears or goes as the mode changes) */
+.stats.is-off .stat { border-style: dashed; }
+.stats.is-off .stat b, .stats.is-off .stat small { color: var(--line-strong); }
+
+/* ---------- left column: region map, then the view controls ---------- */
+.leftcol {
+  grid-column: 1; grid-row: 2; align-self: start; justify-self: start;
+  width: 248px; max-height: 100%; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+}
+.leftcol > * { pointer-events: auto; }
+
+/* ---------- region map ---------- */
+.rail {
+  flex: 0 1 auto; min-height: 150px;   /* on short screens the map scrolls so the view controls stay whole */
+  overflow-y: auto;
+  background: var(--panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line); border-radius: var(--r); padding: 10px 8px;
+  display: grid; gap: 2px; align-content: start; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;   /* (start: a short list keeps its rows' height; it doesn't stretch them to fill the card) */
+}
+.rail-title { margin: 2px 6px 6px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.rgroup { display: grid; gap: 2px; }
+.rail button {
+  font: inherit; color: var(--fg); background: transparent; border: 1px solid transparent; border-radius: 7px;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px; text-align: start; cursor: pointer;
+}
+.rail button em { font-style: normal; font-family: var(--f-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rail button:hover { background: var(--bg-lift); }
+.rail button[aria-pressed="true"] { border-color: var(--scan); background: rgba(111, 208, 232, 0.09); }
+.rail button[aria-pressed="true"] em { color: var(--scan); }
+/* the "i" in a list's heading is the shell's "i" (as in the settings), not one of the list's buttons */
+.rail .help { display: inline-block; text-align: center; font: 600 10.5px/1 var(--f-mono); color: var(--muted); border-color: var(--line-strong); border-radius: 50%; background: transparent; }
+.rail .help:hover, .rail .help[aria-expanded="true"] { background: transparent; color: var(--scan); border-color: var(--scan); }
+.rail .rg { padding: 7px 9px; font-size: 13.5px; font-weight: 650; }
+.rail .subs { display: none; gap: 2px; margin: 0 0 4px 12px; padding-inline-start: 8px; border-inline-start: 1px solid var(--line-strong); }
+.rail .rgroup.open .subs { display: grid; }
+.rail .sb { padding: 5px 9px; font-size: 12.5px; color: var(--muted); }
+.rail .sb[aria-pressed="true"] { color: var(--fg); }
+
+/* (desktop: the columns either side run down past the row of buttons under the model, to the bottom of the window:
+   more room for the region list and the settings, and their height doesn't depend on what that row holds) */
+@media (min-width: 901px) { .leftcol, .panel { grid-row: 2 / 4; }
+}
+
+/* ---------- control panel ---------- */
+.panel {
+  grid-column: 3; grid-row: 2; justify-self: end; align-self: start;
+  width: var(--panel-w); box-sizing: border-box; max-height: 100%; overflow-y: auto;
+  background: var(--panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line); border-radius: var(--r);
+  padding: 14px; display: grid; gap: 16px;
+  scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+  /* On short screens the panel scrolls in Study (it has the search box) but not in Practice / Test. Keeping the
+     scrollbar's space reserved stops the contents narrowing when it appears (Windows-style scrollbars). */
+  scrollbar-gutter: stable;
+}
+.panel h3 { margin: 0 0 7px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+/* Segments share the width equally, but a longer label (e.g. "Entraînement") takes the room it needs. */
+.seg { display: flex; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 3px; gap: 3px; }
+.seg button { flex: 1 1 0; white-space: nowrap; font: inherit; font-weight: 600; font-size: 13px; color: var(--muted); background: transparent; border: 0; border-radius: 6px; padding: 7px 6px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--bg-lift); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.seg button:hover { color: var(--fg); }
+.row { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--fg); background: var(--bg-lift); border: 1px solid var(--line-strong); border-radius: 7px; padding: 7px 10px; cursor: pointer; }
+.btn:hover { border-color: var(--scan); }
+.btn[aria-pressed="true"] { border-color: var(--scan); color: var(--scan); }
+.btn.primary { background: var(--bone); color: #1b1610; border-color: var(--bone); }
+.btn.primary:hover { filter: brightness(1.05); }
+.btn:disabled { opacity: .45; cursor: default; }
+.hint { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 0; }
+.hint kbd { font-family: var(--f-mono); font-size: 11px; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; color: var(--fg); }
+.best { margin-top: 8px; font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }   /* (under the buttons: one line where it fits on one) */
+.best b { color: var(--bone); font-weight: 600; }
+/* the language picker's look is /js/language.js's (the same in every tool), in the colours above */
+
+/* A row's title with its "i" beside it (what the row does: shown in .helpbox, floating, so nothing moves) */
+.sec-h { display: flex; justify-content: flex-start; align-items: center; gap: 7px; margin-bottom: 7px; }
+.sec-h h3 { margin: 0; }
+.help { position: relative; flex: none; width: 17px; height: 17px; padding: 0; font: 600 10.5px/1 var(--f-mono); color: var(--muted); background: transparent; border: 1px solid var(--line-strong); border-radius: 50%; cursor: pointer; }
+.help::after { content: ""; position: absolute; inset: -9px; }   /* (easier to hit than it looks) */
+.help:hover, .help[aria-expanded="true"] { color: var(--scan); border-color: var(--scan); }
+.helpbox { position: fixed; z-index: 30; width: min(310px, calc(100vw - 24px)); box-sizing: border-box; display: grid; gap: 9px; padding: 12px 14px; background: var(--bg-lift); border: 1px solid var(--scan); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5); font-size: 12.5px; line-height: 1.5; }
+.helpbox b { display: block; font-weight: 650; font-size: 13px; color: var(--bone); }
+.helpbox p { margin: 0; color: var(--muted); }
+.helpbox p.now b { color: var(--scan); }   /* (the one in use) */
+/* (a row that doesn't apply in this mode: the kind of question in Explore; the notes and Find outside it) */
+.panel section.is-off h3, .panel section.is-off .seg button { color: var(--line-strong); }
+.panel section.is-off .seg button[aria-pressed="true"] { color: var(--muted); }
+.panel section.is-off .seg { border-style: dashed; }
+.panel section.is-off .seg button { cursor: default; background: none; box-shadow: none; }
+/* An On / Off row (Hints, Notes): the switch is on its title's line, half a row wide, so it starts where the second
+   half of the rows above it does */
+.sw .sec-h { margin: 0; min-height: 32px; }
+.sw .seg { flex: 0 0 50%; box-sizing: border-box; margin-inline-start: auto; }
+.sw .seg button { flex: 1 1 0; min-width: 0; padding: 6px 6px; }
+.pop-head { display: flex; justify-content: space-between; align-items: center; min-height: 14px; }
+.pop-head h2 { margin: 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.panel-foot { display: flex; gap: 16px; padding-top: 10px; border-top: 1px solid var(--line); }
+.linkbtn { padding: 4px 0; font: 500 12px/1.2 var(--f-mono); color: var(--muted); background: none; border: 0; cursor: pointer; }
+.linkbtn:hover { color: var(--scan); }
+/* Preferences and Keys (dialogs) */
+.dlg { width: min(400px, 100%); gap: 16px; }
+.dlg-head { display: flex; justify-content: space-between; align-items: center; }
+.dlg h3 { margin: 0 0 7px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+/* the first-visit card: the three modes as three big buttons, each with its one line */
+.dlg.start { width: min(440px, 100%); }
+.dlg.start h2 { font-size: 19px; letter-spacing: 0; text-transform: none; color: var(--bone); }
+.start-modes { display: grid; gap: 8px; }
+.start-modes button { display: grid; gap: 3px; text-align: start; padding: 12px 14px; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 10px; color: var(--fg); font: inherit; cursor: pointer; }
+.start-modes button:hover, .start-modes button:focus-visible { border-color: var(--scan); }
+.start-modes b { font-weight: 800; font-stretch: 118%; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--scan); }
+.start-modes span { font-size: 13px; line-height: 1.45; color: var(--muted); }
+.know { margin-top: 2px; font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }   /* ("You know 41 of 206": under the best line, always there, so nothing appears as answers come in) */
+.keys-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 13px; color: var(--fg); }
+.keys-list li { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.keys-list kbd { font-family: var(--f-mono); font-size: 11.5px; border: 1px solid var(--line-strong); border-radius: 4px; padding: 1px 6px; background: var(--bg); color: var(--fg); }
+
+/* the line under the tool's name: what the tool is for, and under it how far you have got */
+.brand .sub { color: var(--muted); font-size: 12.5px; font-stretch: 90%; text-shadow: 0 0 3px rgba(5, 8, 11, 0.95), 0 0 6px rgba(5, 8, 11, 0.9), 0 1px 12px rgba(5, 8, 11, 0.9); }
+body.clean .brand .sub, body.clean .flank { display: none; }
+/* Find, at the foot of the view card (Explore) */
+.vc-sec.is-off h4 { color: var(--line-strong); }
+.wide-only { }
+
+/* ---------- bottom dock ---------- */
+.dock { grid-column: 2; grid-row: 3; justify-self: center; align-self: end; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; min-height: 36px; }   /* (its row keeps its height in Explore, where it has no button, so the columns beside the model don't change size with the mode) */
+/* Fixed line height: the ← → on Previous / Next come from a fallback font with a taller line, which made the
+   dock 2px taller in Study and nudged the region map and View card on shorter screens. */
+.dock .btn { background: var(--panel); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 9px 14px; font-size: 13px; line-height: 16px; }
+#settingsBtn, #viewBtn { display: none; }
+#viewBtn.zoomed { border-color: var(--scan); color: var(--scan); }
+.credit { font-size: 11px; color: var(--muted); line-height: 1.55; margin: 0; }
+.credit a { color: var(--muted); text-underline-offset: 2px; }
+.credit a:hover { color: var(--fg); }
+
+/* ---------- view controls ---------- */
+.viewcard {
+  flex: none;
+  background: var(--panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line); border-radius: var(--r); padding: 10px 10px 11px;
+  display: grid; gap: 8px;
+}
+.vc-head { display: flex; justify-content: space-between; align-items: center; min-height: 14px; }
+.vc-head-actions { display: flex; gap: 6px; align-items: center; }
+.voice-btn {
+  font: inherit; font-size: 11.5px; font-weight: 600; color: var(--muted); background: transparent; cursor: pointer;
+  border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px 9px 2px 7px; display: inline-flex; align-items: center; gap: 6px;
+}
+.voice-btn i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+.voice-btn:hover { color: var(--fg); border-color: var(--scan); }
+.voice-btn[aria-pressed="true"] { color: var(--scan); border-color: var(--scan); }
+.voice-btn[aria-pressed="true"] i { background: var(--bad); animation: rec-blink 1.4s ease-in-out infinite; }
+@keyframes rec-blink { 50% { opacity: .3; } }
+.voice-heard { margin: -2px 4px 0; font-family: var(--f-mono); font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.voice-heard.ok { color: var(--ok); }
+.voice-heard.bad { color: var(--bad); white-space: normal; line-height: 1.45; }
+.vc-head h3 { margin: 0 0 0 4px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.vc-sec { display: grid; gap: 5px; }
+.vc-sec h4 { margin: 0 0 0 4px; font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.viewcard .seg button { padding: 5px 6px; font-size: 12.5px; }
+/* a zoom chip whose name is too long for its column (a long language, an engine part) is cut with "…" rather than widening the panel */
+.zp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.zchip {
+  font: inherit; font-size: 12.5px; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 7px;
+  padding: 4px 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 6px; text-align: start; white-space: nowrap;
+}
+.zchip span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.zchip kbd { font-family: var(--f-mono); font-size: 10.5px; color: var(--muted); }
+.zchip:hover { border-color: var(--line-strong); }
+.zchip[aria-pressed="true"] { border-color: var(--scan); background: rgba(111, 208, 232, 0.09); }
+.zchip[aria-pressed="true"] kbd { color: var(--scan); }
+.zchip:disabled { opacity: .35; cursor: default; }
+.vc-tools { display: flex; flex-wrap: wrap; gap: 5px; }
+.vc-tools .btn { flex: 1 1 0; padding: 6px 4px; font-size: 12px; white-space: nowrap; }
+.viewcard .hint { margin: 0 4px; font-size: 11.5px; }
+.narrow-only { display: none; }
+/* shorter laptop screens (940px of height and less): tighten the region map and zoom rows so both cards fit without
+   scrolling. The same in every atlas, so two atlases side by side look alike. */
+@media (min-width: 901px) and (max-height: 940px) {
+  .leftcol { gap: 8px; }
+  .rail { padding-block: 7px; }
+  .rail .rg { padding: 5px 9px; }
+  .rail .sb { padding: 3px 9px; }
+  .rail-title { margin-bottom: 4px; }
+  .zchip { padding-block: 3px; }
+  .viewcard .seg button { padding-block: 4px; }
+}
+/* (a short window: the settings' rows sit a little closer, so the panel needn't scroll) */
+@media (min-width: 901px) and (max-height: 760px) {
+  .panel { gap: 11px; padding-block: 11px; }
+  .panel .sec-h { margin-bottom: 5px; }
+  .panel .sw .sec-h { margin-bottom: 0; }
+}
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+  background: var(--panel); border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: 8px 16px; font-size: 13.5px; max-width: min(560px, calc(100% - 32px)); text-align: center;
+  opacity: 0; transition: opacity .2s ease; pointer-events: none; z-index: 12;
+}
+.toast.show { opacity: 1; }
+.toast.bad { border-color: var(--bad); }
+.toast.ok { border-color: var(--ok); }
+
+/* ---------- overlays ---------- */
+.overlay {
+  position: fixed; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; z-index: 20;
+  background: rgba(6, 10, 14, 0.62); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.card { box-sizing: border-box; width: min(480px, 100%); max-height: 86vh; overflow-y: auto; background: var(--bg-lift); border: 1px solid var(--line-strong); border-radius: 14px; padding: 22px; display: grid; gap: 14px; }
+.card h2 { margin: 0; font-weight: 800; font-stretch: 118%; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--scan); }
+.card p { margin: 0; color: var(--muted); line-height: 1.5; }
+#confirm .card { width: min(400px, 100%); }
+#confirm p { color: var(--fg); }
+.confirm-actions { justify-content: flex-end; gap: 8px; }
+.confirm-actions .btn { padding: 9px 16px; font-size: 13px; }
+.btn.danger { color: var(--bad); border-color: rgba(255, 122, 107, 0.45); }
+.btn.danger:hover { border-color: var(--bad); }
+
+/* ---------- clean recording view ---------- */
+body.clean .panel, body.clean .leftcol, body.clean .dock .btn:not(#cleanExit) { display: none !important; }
+body.clean .pname { font-size: clamp(30px, 4.6vw, 60px); }
+body.clean .prompt { padding: 16px 26px; }
+#cleanExit { display: none; }
+body.clean #cleanExit { display: inline-block; opacity: .55; }
+
+:focus-visible { outline: 2px solid var(--scan); outline-offset: 2px; }
+
+/* ---------- phones / narrow ---------- */
+@media (max-width: 900px) {
+  .ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto minmax(0, 1fr) auto; gap: 8px; }
+  /* phones: a slim logo row on top, so visitors (most arrive from Instagram) can get back to the site */
+  .brand { grid-column: 1; grid-row: 1; justify-self: center; }
+  .lockup { gap: 9px; }
+  .home .logo-mark { height: 16px; }
+  .brand .mark { font-size: 15px; }
+  .prompt { grid-column: 1; grid-row: 2; align-self: stretch; padding: 10px 14px; }
+  /* (Previous and Next are inside the card's edges) */
+  .prompt.stepping { padding-inline: 44px; }
+  .flank { width: 38px; height: 44px; background: none; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  body.name-flat .flank svg { width: 20px; height: 20px; }
+  .flank.prev { inset-inline-start: 3px; }
+  .flank.next { inset-inline-end: 3px; }
+  .wide-only { display: none !important; }
+  .pname { font-size: calc(clamp(19px, 5.6vw, 26px) * var(--card-scale, 1)); }
+  .ptip { font-size: 12px; }
+  .stats { grid-column: 1; grid-row: 3; justify-self: center; }
+  .stat { padding: 4px 9px; min-width: 56px; }
+  .stat b { font-size: 14px; }
+  /* region map becomes one scrolling row; the open region's sub-areas appear right after it */
+  .leftcol { display: contents; }
+  .rail {
+    grid-column: 1; grid-row: 4; width: 100%; min-height: 0; max-height: none; overflow-x: auto; overflow-y: hidden;
+    display: flex; flex-wrap: nowrap; gap: 5px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail-title { display: none; }
+  .rgroup, .rail .rgroup.open .subs { display: contents; }
+  .rail button { flex: none; background: var(--panel); border-color: var(--line); white-space: nowrap; }
+  .rail .rg { padding: 6px 10px; font-size: 13px; }
+  .rail .sb { padding: 6px 10px; font-size: 12.5px; border-style: dashed; }
+  .dock { grid-column: 1; grid-row: 6; }
+  .dock .btn { padding: 9px 12px; }
+  #settingsBtn, #viewBtn { display: inline-block; }
+  /* settings and view controls are bottom sheets */
+  .panel, .viewcard {
+    position: fixed; left: 0; right: 0; bottom: 0; width: auto; max-height: 72vh; overflow-y: auto; z-index: 15;
+    justify-self: stretch;   /* (the whole width: a browser that aligns a fixed box in a grid would otherwise push the settings to the right, as wide as their words) */
+    border-radius: 16px 16px 0 0; border-bottom: 0;
+    padding-block: 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    transform: translateY(105%); transition: transform .25s ease;
+  }
+  .viewcard { gap: 12px; }
+  body.sheet-open .panel, body.view-open .viewcard { transform: none; }
+  .panel .close-sheet, .viewcard .close-sheet { display: inline-block; }
+  .zp-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 5px; }
+  .zchip { padding: 8px 9px; }
+  .zchip kbd { display: none; }
+  .narrow-only { display: block; }
+}
+.close-sheet { display: none; justify-self: end; }
+/* ---------- a tool whose subject sits in the page's flow, in a wider middle column (the trainers) ----------
+   <div class="ui wide">: the middle column (.centre) holds the name card, the subject (a card table, a board, photos)
+   and the buttons under it, one above the other, and is wider than an atlas's (charts and boards need it). Everything
+   else is the shell's as above. On a phone: the brand, the score, the list as one scrolling row, then the column. */
+body:has(> .ui.wide) {
+  margin: 0;
+  background: radial-gradient(120% 80% at 50% 45%, #121e28 0%, #0d151c 45%, var(--bg) 78%) fixed;
+  -webkit-tap-highlight-color: transparent;
+  --tip-height: 0px;   /* (the line under the name: no room kept for it) */
+  --tip-width: 64ch;
+}
+.ui.wide { grid-template-columns: minmax(272px, 1fr) minmax(0, 720px) minmax(var(--panel-w), 1fr); grid-template-rows: auto minmax(0, 1fr); }
+@media (min-width: 901px) { .ui.wide > .leftcol, .ui.wide > .panel { grid-row: 2; } }
+.ui.wide button { touch-action: manipulation; }
+.centre { grid-column: 2; grid-row: 1 / 3; min-height: 0; display: flex; flex-direction: column; gap: 10px; }
+.centre > .prompt { flex: none; transition: border-color .15s; }
+.centre .pname { white-space: normal; overflow: visible; }   /* (a long name wraps rather than being cut) */
+.centre .pbar.is-off { visibility: hidden; }
+.centre .prompt.is-ok .eyebrow { color: var(--ok); }
+.centre .prompt.is-bad .eyebrow { color: var(--bad); }
+.centre .prompt.is-review > :not(.eyebrow, .review, .pill) { display: none; }
+.centre > .stage { flex: 1 1 0; min-height: 0; display: flex; }   /* (the subject: it takes the room the name and the buttons leave) */
+.centre > .dock { flex: none; align-self: stretch; display: grid; gap: 8px; justify-items: center; justify-content: stretch; }   /* (its column the full width, so a row of answers can fill it whatever their names' lengths) */
+.navrow { display: flex; gap: 6px; justify-content: center; }
+.navrow:not(:has(.btn:not([hidden]):not(#cleanExit))) { display: none; }
+/* the list down the left: a title with its "i", then (where a tool has one) a segment to pick a set, then the rows */
+.rail-head { margin: 2px 6px 6px; }
+.rail-head .rail-title { margin: 0; }
+.rail .seg { margin-bottom: 8px; }
+.rail button em.done { color: var(--ok); }
+.rail button em.done::after { content: " \2713"; }
+/* the toast sits over the subject, clear of the buttons under it */
+.ui.wide ~ .toast { top: calc(env(safe-area-inset-top, 0px) + 150px); bottom: auto; }
+/* How it works: a window of a few paragraphs and a list */
+.how ol { margin: 0; padding-inline-start: 20px; color: var(--muted); line-height: 1.6; display: grid; gap: 6px; }
+.how b { color: var(--fg); font-weight: 600; }
+@media (max-width: 900px) {
+  .ui.wide { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto minmax(0, 1fr); padding-block: calc(env(safe-area-inset-top, 0px) + 10px) calc(env(safe-area-inset-bottom, 0px) + 10px); }
+  .ui.wide > .stats { grid-row: 2; }
+  .ui.wide > .leftcol { display: flex; grid-column: 1; grid-row: 3; width: 100%; }
+  .ui.wide .rail { align-items: center; }
+  .ui.wide .rail-head { display: none; }
+  .ui.wide .rail .seg { margin: 0 4px 0 0; flex: none; }
+  .ui.wide .rail .seg button { padding: 6px 10px; }
+  .centre { grid-column: 1; grid-row: 4; gap: 8px; }
+  .ui.wide ~ .toast { top: calc(env(safe-area-inset-top, 0px) + 120px); }
+}
+@media (max-width: 900px) and (max-height: 640px) {
+  .ui.wide .brand { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; }
+}

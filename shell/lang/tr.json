@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "Bu ne işe yarar",
+		"shell.prefs": "Tercihler",
+		"shell.keys": "Tuşlar",
+		"shell.close": "Kapat",
+		"shell.card_title": "Ad kartı",
+		"shell.card_size": "Boyut",
+		"shell.sound": "Ses",
+		"shell.on": "Açık",
+		"shell.off": "Kapalı",
+		"shell.start_q": "Ne yapmak istersiniz?",
+		"shell.start_foot": "İstediğiniz zaman değiştirebilirsiniz.",
+		"shell.mode_study": "Keşfet",
+		"shell.mode_practice": "Öğren",
+		"shell.mode_test": "Test",
+		"shell.mode": "Mod",
+		"shell.new_best": "Yeni rekor",
+		"shell.go_again": "Tekrar",
+		"shell.practise_misses": "Yanlışları çalış",
+		"shell.time": "Süre",
+		"shell.acc": "İsabet",
+		"shell.streak": "Seri",
+		"shell.test_complete": "Test tamamlandı",
+		"shell.correct": {
+			"one": "doğru",
+			"other": "doğru"
+		},
+		"shell.missed": {
+			"one": "yanlış",
+			"other": "yanlış"
+		},
+		"shell.key_sound": "<kbd>M</kbd> ses",
+		"shell.settings": "Ayarlar",
+		"shell.done": "Bitti",
+		"shell.restart": "Yeniden başla",
+		"shell.clean": "Sade görünüm",
+		"shell.exit_clean": "Sade görünümden çık",
+		"shell.know": "{m} taneden {n} tanesini biliyorsunuz"
+	}
+}

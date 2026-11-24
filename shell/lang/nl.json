@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "Wat dit doet",
+		"shell.prefs": "Voorkeuren",
+		"shell.keys": "Toetsen",
+		"shell.close": "Sluiten",
+		"shell.card_title": "Naamkaart",
+		"shell.card_size": "Grootte",
+		"shell.sound": "Geluid",
+		"shell.on": "Aan",
+		"shell.off": "Uit",
+		"shell.start_q": "Wat wil je doen?",
+		"shell.start_foot": "Je kunt altijd wisselen.",
+		"shell.mode_study": "Verkennen",
+		"shell.mode_practice": "Leren",
+		"shell.mode_test": "Toets",
+		"shell.mode": "Modus",
+		"shell.new_best": "Nieuw record",
+		"shell.go_again": "Nog een keer",
+		"shell.practise_misses": "Fouten oefenen",
+		"shell.time": "Tijd",
+		"shell.acc": "Score",
+		"shell.streak": "Reeks",
+		"shell.test_complete": "Toets klaar",
+		"shell.correct": {
+			"one": "goed",
+			"other": "goed"
+		},
+		"shell.missed": {
+			"one": "fout",
+			"other": "fout"
+		},
+		"shell.key_sound": "<kbd>M</kbd> geluid",
+		"shell.settings": "Instellingen",
+		"shell.done": "Klaar",
+		"shell.restart": "Opnieuw",
+		"shell.clean": "Vrij zicht",
+		"shell.exit_clean": "Vrij zicht sluiten",
+		"shell.know": "Je kent er {n} van de {m}"
+	}
+}

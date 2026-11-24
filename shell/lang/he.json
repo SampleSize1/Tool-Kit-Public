@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "מה זה עושה",
+		"shell.prefs": "העדפות",
+		"shell.keys": "מקשים",
+		"shell.close": "סגירה",
+		"shell.card_title": "כרטיס השם",
+		"shell.card_size": "גודל",
+		"shell.sound": "צליל",
+		"shell.on": "פועל",
+		"shell.off": "כבוי",
+		"shell.start_q": "מה תרצו לעשות?",
+		"shell.start_foot": "אפשר להחליף בכל רגע.",
+		"shell.mode_study": "סיור",
+		"shell.mode_practice": "לימוד",
+		"shell.mode_test": "מבחן",
+		"shell.mode": "מצב",
+		"shell.new_best": "שיא חדש",
+		"shell.go_again": "שוב",
+		"shell.practise_misses": "לתרגל את הטעויות",
+		"shell.time": "זמן",
+		"shell.acc": "דיוק",
+		"shell.streak": "רצף",
+		"shell.test_complete": "המבחן הושלם",
+		"shell.correct": {
+			"one": "נכון",
+			"other": "נכונים"
+		},
+		"shell.missed": {
+			"one": "הוחמץ",
+			"other": "הוחמצו"
+		},
+		"shell.key_sound": "<kbd>M</kbd> צלילים",
+		"shell.settings": "הגדרות",
+		"shell.done": "סיום",
+		"shell.restart": "התחלה מחדש",
+		"shell.clean": "תצוגה נקייה",
+		"shell.exit_clean": "יציאה מתצוגה נקייה",
+		"shell.know": "אתם יודעים {n} מתוך {m}"
+	}
+}

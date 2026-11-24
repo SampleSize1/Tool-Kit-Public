@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "Mire jó ez",
+		"shell.prefs": "Preferenciák",
+		"shell.keys": "Billentyűk",
+		"shell.close": "Bezárás",
+		"shell.card_title": "Névkártya",
+		"shell.card_size": "Méret",
+		"shell.sound": "Hang",
+		"shell.on": "Be",
+		"shell.off": "Ki",
+		"shell.start_q": "Mit szeretnél csinálni?",
+		"shell.start_foot": "Bármikor válthatsz.",
+		"shell.mode_study": "Felfedezés",
+		"shell.mode_practice": "Tanulás",
+		"shell.mode_test": "Teszt",
+		"shell.mode": "Mód",
+		"shell.new_best": "Új csúcs",
+		"shell.go_again": "Újra",
+		"shell.practise_misses": "A hibák gyakorlása",
+		"shell.time": "Idő",
+		"shell.acc": "Pontosság",
+		"shell.streak": "Sorozat",
+		"shell.test_complete": "A teszt kész",
+		"shell.correct": {
+			"one": "helyes",
+			"other": "helyes"
+		},
+		"shell.missed": {
+			"one": "hibás",
+			"other": "hibás"
+		},
+		"shell.key_sound": "<kbd>M</kbd> hang",
+		"shell.settings": "Beállítások",
+		"shell.done": "Kész",
+		"shell.restart": "Újrakezdés",
+		"shell.clean": "Tiszta nézet",
+		"shell.exit_clean": "Kilépés a tiszta nézetből",
+		"shell.know": "Tudod: {n}/{m}"
+	}
+}

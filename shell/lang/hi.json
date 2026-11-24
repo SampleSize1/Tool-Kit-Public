@@ -1,0 +1,41 @@
+{
+	"ui": {
+		"shell.help_aria": "यह क्या करता है",
+		"shell.prefs": "प्राथमिकताएँ",
+		"shell.keys": "कुंजियाँ",
+		"shell.close": "बंद करें",
+		"shell.card_title": "नाम कार्ड",
+		"shell.card_size": "आकार",
+		"shell.sound": "ध्वनि",
+		"shell.on": "चालू",
+		"shell.off": "बंद",
+		"shell.start_q": "आप क्या करना चाहेंगे?",
+		"shell.start_foot": "आप कभी भी बदल सकते हैं।",
+		"shell.mode_study": "खोजबीन",
+		"shell.mode_practice": "सीखें",
+		"shell.mode_test": "टेस्ट",
+		"shell.mode": "मोड",
+		"shell.new_best": "नया सर्वश्रेष्ठ",
+		"shell.go_again": "फिर से",
+		"shell.practise_misses": "गलतियों का अभ्यास",
+		"shell.time": "समय",
+		"shell.acc": "सटीकता",
+		"shell.streak": "लगातार सही",
+		"shell.test_complete": "टेस्ट पूरा हुआ",
+		"shell.correct": {
+			"one": "सही",
+			"other": "सही"
+		},
+		"shell.missed": {
+			"one": "गलत",
+			"other": "गलत"
+		},
+		"shell.key_sound": "<kbd>M</kbd> ध्वनि",
+		"shell.settings": "सेटिंग",
+		"shell.done": "हो गया",
+		"shell.restart": "फिर से शुरू",
+		"shell.clean": "साफ़ दृश्य",
+		"shell.exit_clean": "साफ़ दृश्य से बाहर",
+		"shell.know": "आप {m} में से {n} जानते हैं"
+	}
+}

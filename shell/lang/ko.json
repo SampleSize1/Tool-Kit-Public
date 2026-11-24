@@ -1,0 +1,39 @@
+{
+	"ui": {
+		"shell.help_aria": "이 항목 설명",
+		"shell.prefs": "환경설정",
+		"shell.keys": "단축키",
+		"shell.close": "닫기",
+		"shell.card_title": "이름 카드",
+		"shell.card_size": "크기",
+		"shell.sound": "소리",
+		"shell.on": "켜기",
+		"shell.off": "끄기",
+		"shell.start_q": "무엇을 할까요?",
+		"shell.start_foot": "언제든지 바꿀 수 있습니다.",
+		"shell.mode_study": "탐색",
+		"shell.mode_practice": "학습",
+		"shell.mode_test": "시험",
+		"shell.mode": "모드",
+		"shell.new_best": "최고 기록 경신",
+		"shell.go_again": "다시 하기",
+		"shell.practise_misses": "틀린 것 연습",
+		"shell.time": "시간",
+		"shell.acc": "정확도",
+		"shell.streak": "연속",
+		"shell.test_complete": "시험 완료",
+		"shell.correct": {
+			"other": "정답"
+		},
+		"shell.missed": {
+			"other": "오답"
+		},
+		"shell.key_sound": "<kbd>M</kbd> 소리",
+		"shell.settings": "설정",
+		"shell.done": "완료",
+		"shell.restart": "다시 시작",
+		"shell.clean": "깔끔한 보기",
+		"shell.exit_clean": "깔끔한 보기 끝내기",
+		"shell.know": "{m}개 중 {n}개를 알고 있어요"
+	}
+}

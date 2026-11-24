@@ -1,0 +1,39 @@
+{
+	"ui": {
+		"shell.help_aria": "Fungsi ini",
+		"shell.prefs": "Preferensi",
+		"shell.keys": "Tombol",
+		"shell.close": "Tutup",
+		"shell.card_title": "Kartu nama",
+		"shell.card_size": "Ukuran",
+		"shell.sound": "Suara",
+		"shell.on": "Aktif",
+		"shell.off": "Mati",
+		"shell.start_q": "Apa yang ingin kamu lakukan?",
+		"shell.start_foot": "Kamu bisa berganti kapan saja.",
+		"shell.mode_study": "Jelajahi",
+		"shell.mode_practice": "Belajar",
+		"shell.mode_test": "Ujian",
+		"shell.mode": "Mode",
+		"shell.new_best": "Rekor baru",
+		"shell.go_again": "Ulangi",
+		"shell.practise_misses": "Latih yang salah",
+		"shell.time": "Waktu",
+		"shell.acc": "Akurasi",
+		"shell.streak": "Beruntun",
+		"shell.test_complete": "Ujian selesai",
+		"shell.correct": {
+			"other": "benar"
+		},
+		"shell.missed": {
+			"other": "salah"
+		},
+		"shell.key_sound": "<kbd>M</kbd> suara",
+		"shell.settings": "Pengaturan",
+		"shell.done": "Selesai",
+		"shell.restart": "Mulai ulang",
+		"shell.clean": "Tampilan bersih",
+		"shell.exit_clean": "Keluar dari tampilan bersih",
+		"shell.know": "Kamu tahu {n} dari {m}"
+	}
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f14">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="__NAME__">
+<meta property="og:description" content="__DESC__">
+<meta property="og:url" content="https://samplesize1.com/tools/__ID__/">
+<meta property="og:image" content="https://samplesize1.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>__NAME__</title>
+<meta name="description" content="__DESC__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<!-- Languages for the tools on this site (picking one, the menu, saving the choice) -->
+<script src="../js/language.js"></script>
+<!-- The look every tool shares first (../shell/), then this tool's own -->
+<link rel="stylesheet" href="../shell/shell.css">
+<link rel="stylesheet" href="style.css">
+
+<div class="ui wide">
+  <div class="brand">
+    <div class="lockup">
+      <!-- the SampleSize_1 logo (the [1] mark); links back to the main site -->
+      <a class="home" id="homeLink" href="https://samplesize1.com/" aria-label="SampleSize_1 home page" data-i18n-aria="home_aria">
+        <svg class="logo-mark" viewBox="516 555 968 888" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M516 555H772V670H663V1328H772V1443H516Z"></path>
+          <path d="M1484 555H1227V670H1335V1328H1227V1443H1484Z"></path>
+          <path d="M864 733L1092 698V1320H964V823L864 840Z"></path>
+        </svg>
+      </a>
+      <div class="mark">__MARK__ <i class="beta" title="Still being tested: tell me what breaks">Beta</i></div>
+    </div>
+    <div class="sub" data-i18n="sub">__SUB__</div>
+  </div>
+
+  <!-- what to learn, down the left (here one set; a tool with several lists them) -->
+  <div class="leftcol">
+    <nav class="rail" id="rail" aria-label="Sets" data-i18n-aria="sets_aria">
+      <div class="sec-h rail-head"><h3 class="rail-title" data-i18n="sets_title">Sets</h3><button class="help" type="button" data-help="rail" aria-label="What this does" data-i18n-aria="shell.help_aria">i</button></div>
+      <div id="railList" style="display:contents"></div>
+    </nav>
+  </div>
+
+  <main class="centre">
+    <!-- the name card: the question or the thing being looked at, and nothing else -->
+    <div class="prompt" id="prompt" aria-live="polite">
+      <div class="eyebrow" id="pEyebrow" data-i18n-boot="loading">Loading</div>
+      <div class="pname" id="pName" data-i18n-boot="tool_name">__NAME__</div>
+      <div class="pmeta" id="pMeta">&nbsp;</div>
+      <div class="pbar is-off" id="pBarWrap"><i id="pBar"></i></div>
+    </div>
+
+    <!-- the subject: this tool's own -->
+    <div class="stage" id="stageBox"><div class="board" id="board"><noscript><p class="note">This tool needs JavaScript.</p></noscript></div></div>
+
+    <div class="dock">
+      <div class="actions" id="actions"></div>
+      <div class="navrow">
+        <button class="btn" id="settingsBtn" type="button" data-i18n="settings">Settings</button>
+        <button class="btn" id="cleanExit" type="button" data-i18n="clean_exit">Exit clean view</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="stats" id="stats">
+    <div class="stat"><small data-i18n="stat_acc">Accuracy</small><b id="sAcc">–</b></div>
+    <div class="stat"><small data-i18n="stat_time">Time</small><b id="sTime">0:00</b></div>
+    <div class="stat"><small data-i18n="stat_streak">Streak</small><b id="sStreak">0</b></div>
+  </div>
+
+  <aside class="panel" id="panel" aria-label="Settings" data-i18n-aria="settings">
+    <button class="btn close-sheet" id="closeSheet" type="button" data-i18n="done">Done</button>
+    <!-- The same rows in the same order in every mode, so nothing moves. What each row does is behind its "i". -->
+    <section id="langBox" hidden>
+      <div class="sec-h"><h3><label for="langSel" data-i18n="lang_title">Language</label></h3></div>
+      <span class="lang-pick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>
+        <select id="langSel"></select>
+      </span>
+      <p class="hint" id="langNote" style="margin-top:7px" hidden></p>
+    </section>
+    <section>
+      <div class="sec-h"><h3 data-i18n="mode">Mode</h3><button class="help" type="button" data-help="mode" aria-label="What this does" data-i18n-aria="shell.help_aria">i</button></div>
+      <div class="seg" id="modeSeg">
+        <button type="button" data-v="study" data-i18n="shell.mode_study">Explore</button>
+        <button type="button" data-v="practice" data-i18n="shell.mode_practice">Learn</button>
+        <button type="button" data-v="test" data-i18n="shell.mode_test">Test</button>
+      </div>
+    </section>
+    <section id="sizeBox">
+      <div class="sec-h"><h3 data-i18n="questions">Questions</h3><button class="help" type="button" data-help="size" aria-label="What this does" data-i18n-aria="shell.help_aria">i</button></div>
+      <div class="seg" id="sizeSeg">
+        <button type="button" data-v="5">5</button>
+        <button type="button" data-v="10">10</button>
+        <button type="button" data-v="all" data-i18n="all">All</button>
+      </div>
+    </section>
+    <section>
+      <div class="row">
+        <button class="btn primary" id="restartBtn" type="button" data-i18n="restart">Restart</button>
+        <button class="btn" id="cleanBtn" type="button" data-i18n="clean_view">Clean view</button>
+      </div>
+      <div class="best" id="best"></div>
+      <div class="know" id="know"></div>
+    </section>
+    <div class="panel-foot">
+      <button class="linkbtn" id="prefsBtn" type="button" data-i18n="shell.prefs">Preferences</button>
+      <button class="linkbtn wide-only" id="keysBtn" type="button" data-i18n="shell.keys">Keys</button>
+    </div>
+    <p class="credit" data-i18n="credit">Made by __AUTHOR__.</p>
+  </aside>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* The language (/js/language.js): a ?lang= link, then the newest one picked on the site, then the browser's, then
+   English. English only to start: to add a language, see __ID__/README.md. */
+SiteLanguage.start({ tool: '__ID__', langs: ['en'], boot: { en: { loading: 'Loading', tool_name: '__NAME__' } } });
+</script>
+<script src="../js/progress.js"></script>
+<!-- The site's sounds, made in the browser: on or off for every tool (Preferences, or M) -->
+<script src="../js/sound.js"></script>
+<script type="module" src="js/app.js"></script>
+</html>

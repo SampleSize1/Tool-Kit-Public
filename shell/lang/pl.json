@@ -1,0 +1,45 @@
+{
+	"ui": {
+		"shell.help_aria": "Co to robi",
+		"shell.prefs": "Preferencje",
+		"shell.keys": "Klawisze",
+		"shell.close": "Zamknij",
+		"shell.card_title": "Karta nazwy",
+		"shell.card_size": "Rozmiar",
+		"shell.sound": "Dźwięk",
+		"shell.on": "Wł.",
+		"shell.off": "Wył.",
+		"shell.start_q": "Co chcesz zrobić?",
+		"shell.start_foot": "W każdej chwili możesz zmienić.",
+		"shell.mode_study": "Poznaj",
+		"shell.mode_practice": "Nauka",
+		"shell.mode_test": "Test",
+		"shell.mode": "Tryb",
+		"shell.new_best": "Nowy rekord",
+		"shell.go_again": "Jeszcze raz",
+		"shell.practise_misses": "Ćwicz pomyłki",
+		"shell.time": "Czas",
+		"shell.acc": "Trafność",
+		"shell.streak": "Seria",
+		"shell.test_complete": "Test ukończony",
+		"shell.correct": {
+			"one": "dobrze",
+			"few": "dobrze",
+			"many": "dobrze",
+			"other": "dobrze"
+		},
+		"shell.missed": {
+			"one": "źle",
+			"few": "źle",
+			"many": "źle",
+			"other": "źle"
+		},
+		"shell.key_sound": "<kbd>M</kbd> dźwięk",
+		"shell.settings": "Ustawienia",
+		"shell.done": "Gotowe",
+		"shell.restart": "Od nowa",
+		"shell.clean": "Czysty widok",
+		"shell.exit_clean": "Zamknij czysty widok",
+		"shell.know": "Znasz {n} z {m}"
+	}
+}
